@@ -11,7 +11,17 @@ int main(){
    
     char text[TEXT+1];
     char word[WORD+1];
-    scanf("%s", word);
+
+    char ch1;
+    int i1 = 0;
+    scanf("%c", &ch1);
+    while(ch1 != ' ' && ch1 != '\t' && ch1 != '\n'){
+        word[i1++] = ch1;
+        scanf("%c", &ch1);
+    }
+    word[i1] = '\0';
+    //scanf("%s", word);
+    //printf("%s", word);
     char ch;
     int i = 0;
     scanf("%c", &ch);
@@ -197,9 +207,6 @@ void q3(char word[],char text[]){
     if(strlen(word) > strlen(text)){
         loopEnter = 0;
     }
-    if(loopEnter == 0){
-        return;
-    }
     int wordAndSpaces = strlen(word);
     int wordAlone = strlen(word);
     int spaceAlone = 0;
@@ -211,10 +218,10 @@ void q3(char word[],char text[]){
     int resultCounter = 0;
     
     int spaceMode = 0;
-    for(int i = 0; i < wordAlone; i++){
+    for(int i = 0;loopEnter == 1 && i < wordAlone; i++){
         wordIndexes[i] = -1;
     }
-    for(int i = 0; i < strlen(text); i++){
+    for(int i = 0;loopEnter == 1 && i < strlen(text); i++){
         //printf("%c, %d\n",text[i],counter);
         notCharFlag = 1;
         for(int j = 0; j < strlen(word); j++){
@@ -279,25 +286,5 @@ void q3(char word[],char text[]){
     }
     printf("Anagram Sequences: %s", result);
 }
-
-/*
-sea
-A sailor went to sea, sea, sea
-To see what he could see, see, see
-But all that he could see, see, see
-Was the bottom of the deep blue sea, sea, sea!~*/
-
-/*
-Gematria Sequences: sea~ea, s~a, se~sea~ea, s~a, se~sea~all~sea~ea, s~a, se~sea~ea, s~a, se~sea
-Atbash Sequences: 
-Anagram Sequences: sea~sea~sea~sea~sea~sea
-*/
-
-/*
-Gematria Sequences: sea~ea, s~a, se~sea~ea, s~a, se~sea~all~sea~ea, s~a, se~sea~ea, s~a, se~sea
-Atbash Sequences: 
-Anagram Sequences: sea~sea~sea~ sea, sea~sea
-*/
-
 
 
