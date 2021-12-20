@@ -12,6 +12,7 @@ int main(){
     char text[TEXT+1];
     char word[WORD+1];
 
+    //word scanner
     char ch1;
     int i1 = 0;
     scanf("%c", &ch1);
@@ -20,8 +21,8 @@ int main(){
         scanf("%c", &ch1);
     }
     word[i1] = '\0';
-    //scanf("%s", word);
-    //printf("%s", word);
+
+    //text scanner
     char ch;
     int i = 0;
     scanf("%c", &ch);
@@ -108,6 +109,7 @@ void q1(char word[], char text[]){
     
 }
 
+//find index value of letter
 int charValue(char checkWord[],int ind){
     int ascii = checkWord[ind];
     if(ascii >= 65 && ascii <= 90){
@@ -119,6 +121,8 @@ int charValue(char checkWord[],int ind){
     return 0;
     
 }
+
+//find out the nth letter in opposite order
 int charValue2(char checkWord[],int ind){
     int ascii = checkWord[ind];
     if(ascii >= 65 && ascii <= 90){
@@ -141,9 +145,14 @@ void q2(char word[], char text[]){
     char keyword3[WORD +1];
 
     int flag = 1;
+    int loopEnter = 1;
 
     // creating the atbash key
     for(int k = 0; k< strlen(word); k++){
+        if(charValue2(word,k) == 0){
+            loopEnter = 0;
+            break;
+        }
         keyword2[k] = charValue2(word,k);
         keyword3[strlen(word) - k -1] = charValue2(word,k);
     }
@@ -151,7 +160,7 @@ void q2(char word[], char text[]){
     keyword2[strlen(word)] = '\0';
     keyword3[strlen(word)] = '\0';
     
-    int loopEnter = 1;
+    
     if(strlen(word) > strlen(text)){
         loopEnter = 0;
     }
@@ -260,13 +269,11 @@ void q3(char word[],char text[]){
                 wordIndexes[k] = -1;
             }
             if(i > 0){
-                //printf("%i, ",i);
                 int spaces = 0;
                 if(spaceAlone > 0){
                     spaces = spaceAlone - 1;
                 }
                 i = i - counter - spaces;
-                //printf("%i\n",i);
             }
             
             counter = 0;
