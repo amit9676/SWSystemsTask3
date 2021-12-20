@@ -202,6 +202,7 @@ void q3(char word[],char text[]){
     }
     int wordAndSpaces = strlen(word);
     int wordAlone = strlen(word);
+    int spaceAlone = 0;
     int wordIndexes[wordAlone];
     int counter = 0;
     int secondaryCounter = 0;
@@ -214,6 +215,7 @@ void q3(char word[],char text[]){
         wordIndexes[i] = -1;
     }
     for(int i = 0; i < strlen(text); i++){
+        //printf("%c, %d\n",text[i],counter);
         notCharFlag = 1;
         for(int j = 0; j < strlen(word); j++){
             if(text[i] == word[j] && wordIndexes[j] == -1){
@@ -228,6 +230,7 @@ void q3(char word[],char text[]){
         if(text[i] == 32 && spaceMode == 1){
             notCharFlag = 0;
             wordAndSpaces++;
+            spaceAlone++;
         }
         if(counter == strlen(word)){
             int min = wordIndexes[strlen(word) - 1];
@@ -246,12 +249,20 @@ void q3(char word[],char text[]){
             
         }
         if(notCharFlag == 1){
-            for(int i = 0; i < wordAlone; i++){
-                    wordIndexes[i] = -1;
+            for(int k = 0; k < wordAlone; k++){
+                wordIndexes[k] = -1;
             }
+            if(i > 0){
+                //printf("%i, ",i);
+                i = i - counter;
+                //printf("%i\n",i);
+            }
+            
             counter = 0;
             secondaryCounter = 0;
+            spaceAlone = 0;
             spaceMode = 0;
+            wordAndSpaces = wordAlone;
         }
         
     }
@@ -266,25 +277,23 @@ void q3(char word[],char text[]){
 }
 
 /*
-abcd
-a-bc,dbca-zwxyzabzyxw0dcba~
-
-Gematria Sequences: a-bc,d~dbca~dcba
-Atbash Sequences: wxyz~zyxw
-Anagram Sequences: dbca~dcba*/
+sea
+A sailor went to sea, sea, sea
+To see what he could see, see, see
+But all that he could see, see, see
+Was the bottom of the deep blue sea, sea, sea!~*/
 
 /*
-Gematria Sequences: a-bc,d~dbca~dcba
-Atbash Sequences: wxyz~zyxw
-Anagram Sequences: dbca~dcba
+Gematria Sequences: sea~ea, s~a, se~sea~ea, s~a, se~sea~all~sea~ea, s~a, se~sea~ea, s~a, se~sea
+Atbash Sequences: 
+Anagram Sequences: sea~sea~sea~sea~sea~sea
 */
 
 /*
-Gematria Sequences: a-bc,d~dbca~dbca~dcba
-Atbash Sequences: wxyz~zyxw
-Anagram Sequences: dbca~dcba
+Gematria Sequences: sea~ea, s~a, se~sea~ea, s~a, se~sea~all~sea~ea, s~a, se~sea~ea, s~a, se~sea
+Atbash Sequences: 
+Anagram Sequences: sea~sea~sea~ sea, sea~sea
 */
-
 
 
 
