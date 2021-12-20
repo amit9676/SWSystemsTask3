@@ -21,20 +21,15 @@ int main(){
     }
 
     text[i] = '\0';
-    //void q1(char*, char*);
     q1(word,text);
     printf("\n");
-    //void q2(char*, char*);
     q2(word,text);
     printf("\n");
-    //void q3(char*, char*);
     q3(word,text);
     return 0;
 }
 
 void q1(char word[], char text[]){
-    //int charValue(char[], int);
-
 
     int val = 0;
     int current = 0;
@@ -48,12 +43,6 @@ void q1(char word[], char text[]){
     }
     int i = 0;
     while(max < strlen(text)){
-        /*if((text[max] < 65 || (text[max] > 90 && text[max] < 97) || text[max] > 122) && text[max] != 32){
-            max++;
-            //min = max;
-            //current = charValue(text,min);
-            i++;
-        }*/
         if(i == 0){
             current = charValue(text,0);
         }
@@ -78,6 +67,9 @@ void q1(char word[], char text[]){
         else{
             for(int j = min; j <= max;j++){
                 if((j == min || j == max) && charValue(text,j) == 0){
+                    if(j == min){
+                        min++;
+                    }
                     continue;
                 }
                 newString[newStringCounter++]=text[j];
@@ -95,7 +87,13 @@ void q1(char word[], char text[]){
         i++;
         
     }
-    newString[--newStringCounter] = '\0';
+    if(newStringCounter > 0){
+        newString[--newStringCounter] = '\0';
+    }
+    else{
+        newString[newStringCounter] = '\0';
+    }
+    
     printf("Gematria Sequences: %s",newString);
     
 }
@@ -129,13 +127,8 @@ char q2String[WORD+1];
 int q2Ind;
 
 void q2(char word[], char text[]){
-    //int counter = 0;
     char keyword2[WORD +1];
     char keyword3[WORD +1];
-
-    //char newString[TEXT+1];
-    //int newStringCounter = 0;
-    //void findOpposite(int, char[], char[]);
 
     int flag = 1;
 
@@ -148,9 +141,6 @@ void q2(char word[], char text[]){
     keyword2[strlen(word)] = '\0';
     keyword3[strlen(word)] = '\0';
     
-    //
-    //int pp;
-    //int l;
     int loopEnter = 1;
     if(strlen(word) > strlen(text)){
         loopEnter = 0;
@@ -170,7 +160,12 @@ void q2(char word[], char text[]){
         findOpposite(i, keyword3,text);
     }
 
-    q2String[--q2Ind] = '\0';
+    if(q2Ind > 0){
+        q2String[--q2Ind] = '\0';
+    }
+    else{
+        q2String[q2Ind] = '\0';
+    }
     printf("Atbash Sequences: %s", q2String);
 }
 
@@ -260,7 +255,13 @@ void q3(char word[],char text[]){
         }
         
     }
-    result[--resultCounter] = '\0';
+    
+    if(resultCounter > 0){
+        result[--resultCounter] = '\0';
+    }
+    else{
+        result[resultCounter] = '\0';
+    }
     printf("Anagram Sequences: %s", result);
 }
 
@@ -271,6 +272,18 @@ a-bc,dbca-zwxyzabzyxw0dcba~
 Gematria Sequences: a-bc,d~dbca~dcba
 Atbash Sequences: wxyz~zyxw
 Anagram Sequences: dbca~dcba*/
+
+/*
+Gematria Sequences: a-bc,d~dbca~dcba
+Atbash Sequences: wxyz~zyxw
+Anagram Sequences: dbca~dcba
+*/
+
+/*
+Gematria Sequences: a-bc,d~dbca~dbca~dcba
+Atbash Sequences: wxyz~zyxw
+Anagram Sequences: dbca~dcba
+*/
 
 
 
