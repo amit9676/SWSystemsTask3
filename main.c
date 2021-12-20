@@ -254,7 +254,11 @@ void q3(char word[],char text[]){
             }
             if(i > 0){
                 //printf("%i, ",i);
-                i = i - counter;
+                int spaces = 0;
+                if(spaceAlone > 0){
+                    spaces = spaceAlone - 1;
+                }
+                i = i - counter - spaces;
                 //printf("%i\n",i);
             }
             
