@@ -23,10 +23,10 @@ int main(){
     text[i] = '\0';
     //void q1(char*, char*);
     q1(word,text);
-
+    printf("\n");
     //void q2(char*, char*);
     q2(word,text);
-
+    printf("\n");
     //void q3(char*, char*);
     q3(word,text);
     return 0;
@@ -48,12 +48,12 @@ void q1(char word[], char text[]){
     }
     int i = 0;
     while(max < strlen(text)){
-        if((text[max] < 65 || (text[max] > 90 && text[max] < 97) || text[max] > 122) && text[max] != 32){
+        /*if((text[max] < 65 || (text[max] > 90 && text[max] < 97) || text[max] > 122) && text[max] != 32){
             max++;
-            min = max;
-            current = charValue(text,min);
+            //min = max;
+            //current = charValue(text,min);
             i++;
-        }
+        }*/
         if(i == 0){
             current = charValue(text,0);
         }
@@ -78,11 +78,6 @@ void q1(char word[], char text[]){
         else{
             for(int j = min; j <= max;j++){
                 if((j == min || j == max) && charValue(text,j) == 0){
-                    if(j == min){
-                        j++;
-                        min++;
-                        newString[newStringCounter++]=text[j];
-                    }
                     continue;
                 }
                 newString[newStringCounter++]=text[j];
@@ -100,8 +95,8 @@ void q1(char word[], char text[]){
         i++;
         
     }
-    newString[newStringCounter] = '\0';
-    printf("%s",newString);
+    newString[--newStringCounter] = '\0';
+    printf("Gematria Sequences: %s",newString);
     
 }
 
@@ -175,8 +170,8 @@ void q2(char word[], char text[]){
         findOpposite(i, keyword3,text);
     }
 
-    q2String[q2Ind] = '\0';
-    printf("%s", q2String);
+    q2String[--q2Ind] = '\0';
+    printf("Atbash Sequences: %s", q2String);
 }
 
 void findOpposite(int i, char keyword[], char text[]){
@@ -265,9 +260,17 @@ void q3(char word[],char text[]){
         }
         
     }
-    result[resultCounter] = '\0';
-    printf("%s", result);
+    result[--resultCounter] = '\0';
+    printf("Anagram Sequences: %s", result);
 }
+
+/*
+abcd
+a-bc,dbca-zwxyzabzyxw0dcba~
+
+Gematria Sequences: a-bc,d~dbca~dcba
+Atbash Sequences: wxyz~zyxw
+Anagram Sequences: dbca~dcba*/
 
 
 
