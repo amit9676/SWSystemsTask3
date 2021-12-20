@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "declarations.h"
 #define TEXT 1024
 #define WORD 30
 
@@ -11,10 +12,9 @@ int main(){
     char text[TEXT+1];
     char word[WORD+1];
     scanf("%s", word);
-    //printf("%s\n\n", word);
     char ch;
     int i = 0;
-    scanf(" %c", &ch);
+    scanf("%c", &ch);
     while(ch != '~'){
         text[i++] = ch;
         scanf("%c", &ch);
@@ -22,17 +22,18 @@ int main(){
 
     text[i] = '\0';
     //void q1(char*, char*);
-    //q1(word,text);
+    q1(word,text);
 
-    void q2(char*, char*);
+    //void q2(char*, char*);
     q2(word,text);
+
+    //void q3(char*, char*);
+    q3(word,text);
     return 0;
 }
 
 void q1(char word[], char text[]){
-
-    //printf("%s\n", word);
-    int charValue(char[], int);
+    //int charValue(char[], int);
 
 
     int val = 0;
@@ -43,24 +44,20 @@ void q1(char word[], char text[]){
     int newStringCounter = 0;
     
     for(int i = 0; i < strlen(word); i++){
-        //printf("%d\n", charValue(word,i));
         val = val + charValue(word,i);
     }
     int i = 0;
     while(max < strlen(text)){
-        //printf("%d\n", text[i]);
         if((text[max] < 65 || (text[max] > 90 && text[max] < 97) || text[max] > 122) && text[max] != 32){
             max++;
             min = max;
             current = charValue(text,min);
             i++;
-            //continue;
         }
         if(i == 0){
             current = charValue(text,0);
         }
         if(val > current){
-            //printf("too low\n");
             max++;
             if(max >= strlen(text)){
                     break;
@@ -68,7 +65,6 @@ void q1(char word[], char text[]){
             current =current + charValue(text,max);
         }
         else if(val < current){
-            //printf("too high\n");
             current = current - charValue(text,min);
             min++;
             if(min > max){
@@ -80,16 +76,7 @@ void q1(char word[], char text[]){
             }
         }
         else{
-            //printf("here\n");
-            //int k = 0;
             for(int j = min; j <= max;j++){
-                /*if(charValue(text,j) == 0 && text[j] != 32){
-                    while(k > 0){
-                        newString[newStringCounter--] = '\0';
-                        k--;
-                    }
-                    break;
-                }*/
                 if((j == min || j == max) && charValue(text,j) == 0){
                     if(j == min){
                         j++;
@@ -99,10 +86,8 @@ void q1(char word[], char text[]){
                     continue;
                 }
                 newString[newStringCounter++]=text[j];
-                //k++;
             }
             newString[newStringCounter++]='~';
-            //printf("%d, %d", min,max);
             current = current - charValue(text,min);
             min++;
             max++;
@@ -149,13 +134,13 @@ char q2String[WORD+1];
 int q2Ind;
 
 void q2(char word[], char text[]){
-    int counter = 0;
+    //int counter = 0;
     char keyword2[WORD +1];
     char keyword3[WORD +1];
 
-    char newString[TEXT+1];
-    int newStringCounter = 0;
-    void findOpposite(int, char[], char[]);
+    //char newString[TEXT+1];
+    //int newStringCounter = 0;
+    //void findOpposite(int, char[], char[]);
 
     int flag = 1;
 
@@ -169,32 +154,13 @@ void q2(char word[], char text[]){
     keyword3[strlen(word)] = '\0';
     
     //
-    int l;
+    //int pp;
+    //int l;
     int loopEnter = 1;
-    //void findOpposite(int,char[],char[]);
     if(strlen(word) > strlen(text)){
         loopEnter = 0;
     }
     for(int i=0; loopEnter == 1 && i< strlen(text)-strlen(word) + 1;i++){
-       /*flag1 = 1;
-       l=0;
-       for(int k = 0; k < strlen(keyword2);k++){
-           if(keyword2[k] != text[i+l] && (text[i+l] != 32 || k==0)){
-               flag1 = 0;
-               break;
-           }
-           else if(text[i+l] == 32){
-               k--;
-           }
-           l++;
-       }
-       if(flag1 == 1){
-           for(int j = i; j < i+l;j++){
-                newString[newStringCounter++]=text[j];
-           }
-           newString[newStringCounter++] ='~';
-           continue;
-       }*/
         flag = 0;
         findOpposite(i, keyword2,text);
         for(int j = 0; j < strlen(keyword2);j++){
@@ -208,17 +174,14 @@ void q2(char word[], char text[]){
         }
         findOpposite(i, keyword3,text);
     }
-    //newString[newStringCounter] = '\0';
-    //printf("%s", newString);
 
-    newString[q2Ind] = '\0';
+    q2String[q2Ind] = '\0';
     printf("%s", q2String);
 }
 
 void findOpposite(int i, char keyword[], char text[]){
     int flag1 = 1;
     int l=0;
-    //int newStringCounter = 0;
     for(int k = 0; k < strlen(keyword);k++){
         if(keyword[k] != text[i+l] && (text[i+l] != 32 || k==0)){
             flag1 = 0;
@@ -234,11 +197,77 @@ void findOpposite(int i, char keyword[], char text[]){
             q2String[q2Ind++]=text[j];
         }
         q2String[q2Ind++] ='~';
-        //continue;
     }
 }
 
-/*int q2Aid(keyword, text)*/
+
+
+void q3(char word[],char text[]){
+    int loopEnter = 1;
+    if(strlen(word) > strlen(text)){
+        loopEnter = 0;
+    }
+    if(loopEnter == 0){
+        return;
+    }
+    int wordAndSpaces = strlen(word);
+    int wordAlone = strlen(word);
+    int wordIndexes[wordAlone];
+    int counter = 0;
+    int secondaryCounter = 0;
+    int notCharFlag = 1;
+    char result[strlen(text)];
+    int resultCounter = 0;
+    
+    int spaceMode = 0;
+    for(int i = 0; i < wordAlone; i++){
+        wordIndexes[i] = -1;
+    }
+    for(int i = 0; i < strlen(text); i++){
+        notCharFlag = 1;
+        for(int j = 0; j < strlen(word); j++){
+            if(text[i] == word[j] && wordIndexes[j] == -1){
+                wordIndexes[j] = secondaryCounter++;
+                counter++;
+                notCharFlag = 0;
+                spaceMode = 1;
+                break;
+            }
+            
+        }
+        if(text[i] == 32 && spaceMode == 1){
+            notCharFlag = 0;
+            wordAndSpaces++;
+        }
+        if(counter == strlen(word)){
+            int min = wordIndexes[strlen(word) - 1];
+            int minIndex = strlen(word) - 1;
+            for(int j = wordAndSpaces - 1; j >= 0; j--){
+                result[resultCounter++] = text[i - j];
+                if(wordIndexes[j] < min && wordIndexes[j] != 32){
+                    min = wordIndexes[j];
+                    minIndex = j;
+                }
+            }
+            result[resultCounter++] = '~';
+            counter--;
+            wordIndexes[minIndex] = -1;
+            wordAndSpaces = strlen(word);
+            
+        }
+        if(notCharFlag == 1){
+            for(int i = 0; i < wordAlone; i++){
+                    wordIndexes[i] = -1;
+            }
+            counter = 0;
+            secondaryCounter = 0;
+            spaceMode = 0;
+        }
+        
+    }
+    result[resultCounter] = '\0';
+    printf("%s", result);
+}
 
 
 
